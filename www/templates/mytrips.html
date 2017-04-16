@@ -1,0 +1,33 @@
+<ion-view cache-view="false" view-title="My Trips"  >
+  <ion-content>
+    <div class="list">
+        <div ng-repeat="trip in mytrips" class="item list-border card-item" style="padding:0;" >
+        <md-card>
+        <!-- <div class="card zero-margin"> -->
+          <div class="row">
+            <div class="col mytriplist-date " >{{trip.BOOKING_DATE}}</div>
+            <div class="col mytriplist-date ">{{trip.BOOKING_TIME}}</div>
+            <div class="col mytriplist-date ">{{trip.ID}}</div>
+          </div>
+          <div class="row">
+            <div class="col location-name-text ">From : {{trip.FROM_ID}}</div>
+          </div>
+          <div class="row">
+            <div class="col location-name-text ">To : {{trip.TO_ID}}</div>
+          </div>
+          <div class="row" style="text-align:right;">
+            <div class="col"> 
+                <a href="#/app/booking/{{trip.FROM_ID}}/{{trip.TO_ID}}" class="button button-small button-positive">
+                    Re-book trip
+                </a>
+                <a href="#/app/mytripinfo/{{trip.ID}}" class="button button-small button-positive">
+                    View
+                </a>
+            </div>
+          </div>
+        <!-- </div> -->
+        </md-card>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

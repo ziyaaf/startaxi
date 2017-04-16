@@ -1,0 +1,618 @@
+<ion-view cache-view="false" view-title="Booking" class="booking-form-background" >
+  <ion-content ng-controller="BookingCtrl" >
+  <div ng-form name="BookingEstimateForm" class="booking-form-background" >
+  
+  <div ng-hide="!isHideBookingCost"  >
+      
+    <!-- Error messages -->
+    <!-- <div class="row">
+        <div class="col">
+        <div class="item item-input item-stacked-label" >
+            <button class="button button-block button-positive" ng-click="loadsample()" >
+              Load sample
+            </button>
+        </div>
+        </div>
+    </div> 
+     <div style="margin:0 10px;"><button class="button button-block button-positive" ng-click="loadsample()" >
+              Load sample
+    </button>
+    </div> -->
+
+    
+    <script id="templates/form-errors.html" type="text/ng-template">  
+      <div class="form-error" ng-message="required">This field is required.</div>
+      <div class="form-error" ng-message="minlength">This field is must be at least 5 characters.</div>
+      <div class="form-error" ng-message="maxlength">This field is must be less than 50 characters</div>
+    </script>  
+    
+    <md-card>
+    
+    <div class="row">
+      <div class="col col-25">
+          <label class="item item-input">
+            <span class="input-label">From</span>
+            
+            </label>
+        </div>
+        <div class="col">
+        <angucomplete-alt  class="dropfield item-input item-stacked-label" 
+          id="fromloc" 
+              ng-model="bookingForm.from_loc" 
+              placeholder="Pickup location"
+              maxlength="50"
+              pause="1000"
+              selected-object="fromLocation"
+              override-suggestions="true" 
+              initial-value="initfromloc" 
+              remote-url="https://startaxisuk.com/startaxiws/web/location/getautocompletepostcode?&limit=5"
+              remote-url-request-formatter="remoteUrlRequestFn"
+              remote-url-data-field="result"
+              search-fields="postcode"
+              title-field="name"
+              minlength="1"
+              input-class="form-control form-control-small"
+              match-class="highlight" />
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col col-25">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">To</span>
+          </label>
+      </div>
+      <div class="col">
+          <angucomplete-alt class="dropfield item-input item-stacked-label" 
+              ng-model="bookingForm.to_loc"
+              placeholder="Destination"
+              maxlength="50"
+              pause="2000"
+              selected-object="toLocation"
+              override-suggestions="true"  
+              initial-value="inittoloc" 
+              remote-url="https://startaxisuk.com/startaxiws/web/location/getautocompletepostcode?&limit=5"
+              remote-url-request-formatter="remoteUrlRequestFn"
+              remote-url-data-field="result"
+              search-fields="postcode"
+              title-field="name"
+              minlength="1"
+              input-class="form-control form-control-small"
+              match-class="highlight" />
+      </div>
+    </div>
+
+    <div class="row" ng-show="isShowHigherCharge" style="background-color: aliceblue;padding-top:10px;" >
+      <label>
+          <button style="color:#03316B;min-height:36px !important;margin-bottom:7px;" class="button icon ion-information-circled button-clear" ng-click="showterminalchargeinfo()">
+          </button>
+      </label>
+      <div class="col" style="color:#03316B;">
+        Additional charge of &pound; {{additionalCharge}} is applicable.
+        <br>
+        Would you like to be dropped off at the <b>free drop-off zone </b> ?
+        <br />
+        <label class="toggle toggle-energized" style="margin-top:5px;">
+        <input type="checkbox" ng-model="bookingForm.acceptDropoffZoneCharge" >
+        <div class="track">
+                 <div class="handle"></div> 
+               </div>
+        </label>
+      </div>
+    </div>
+    
+    </md-card>
+    
+    
+    <!-- <div class="row" ng-show="isShowHigherCharge" style="background-color: aliceblue;" >
+      <div class="col">
+         <div>    <label class="toggle toggle-energized">
+               <input type="checkbox" ng-model="bookingForm.acceptDropoffZoneCharge" >
+               <div class="track">
+                 <div class="handle"></div> 
+               </div>
+            </label> </div>
+      </div>
+    </div> -->
+    
+    <md-card>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Child seat required ?</span>
+        <div>    <label class="toggle toggle-energized">
+               <input type="checkbox" ng-model="bookingForm.is_child_seat_req" >
+               <div class="track">
+                 <div class="handle"></div> 
+               </div>
+            </label> </div>
+        </label>
+      </div>
+      <div class="col" ng-show="bookingForm.is_child_seat_req">
+        <label class="item dropdown-item-input item-stacked-label">
+        <span class="input-label">Number of seats</span>
+         <div><!--
+             <input type="number" placeholder="1" ng-model="bookingForm.noofchildseats" >
+               <div class="track">
+                 <div class="handle"></div>
+               </div>-->
+               
+            </div> 
+        </label>
+        <md-select ng-model="bookingForm.noofchildseats" placeholder="1" class="">
+              <md-option value="1">1</md-option>
+              <md-option value="2">2</md-option>
+              <md-option value="3">3</md-option>
+        </md-select>
+      </div>
+    </div>
+    
+    </md-card>
+    
+    <md-card>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Is return journey required ?</span>
+        <div>    <label class="toggle toggle-energized">
+               <input type="checkbox" ng-model="bookingForm.is_ret_req" >
+               <div class="track">
+                 <div class="handle"></div> 
+               </div>
+            </label> </div>
+        </label>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+        
+    <!-- Journey start date -->
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Start Date</span>
+        <input type="date" ng-model="bookingStartDate" min="{{minstartdate}}" >
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Start Time</span>
+        <input type="time" ng-model="bookingStartTime">
+        </label>
+      </div>
+    </div>
+    <!-- Journey end date -->
+    <div class="row" ng-show="bookingForm.is_ret_req" >
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Return Date</span>
+        <input type="date" ng-model="bookingReturnDate" min="{{minstartdate}}" >
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Return Time</span>
+        <input type="time" ng-model="bookingReturnTime">
+        </label>
+      </div>
+    </div>
+    
+    </md-card>
+    
+    <md-card>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item dropdown-item-input item-stacked-label">
+        <span class="dropdown-input-label">Number of passengers</span>
+        <!-- <input required name="noofpassengers" 
+        ng-class="{ 'input-has-error' : BookingEstimateForm.noofpassengers.$invalid}" 
+        ng-change="setvehicletype($event)" type="number" placeholder="1" 
+        ng-model="bookingForm.noofpassengers" > -->
+        
+        <div class="form-errors" ng-messages="BookingEstimateForm.noofpassengers.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+        </label>
+        <md-select ng-model="bookingForm.noofpassengers" placeholder="1" class="" ng-change="setvehicletype($event)" >
+              <md-option value="1">1</md-option>
+              <md-option value="2">2</md-option>
+              <md-option value="3">3</md-option>
+              <md-option value="4">4</md-option>
+              <md-option value="5">5</md-option>
+              <md-option value="6">6</md-option>
+              <md-option value="7">7</md-option>
+              <md-option value="8">8</md-option>
+        </md-select>
+      </div>
+      
+      <div class="col">
+
+      </div>
+    </div>
+    
+    </md-card>
+    
+    <md-card>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item dropdown-item-input item-stacked-label">
+        <span class="dropdown-input-label">Luggages </span>
+        <!-- <input name="luggages"
+                ng-class="{ 'input-has-error' : BookingEstimateForm.luggages.$invalid}" 
+ type="number" min="0" placeholder="0" ng-model="bookingForm.luggages" > -->
+        </label>
+        <md-select ng-model="bookingForm.luggages" placeholder="0" class="">
+              <md-option value="0">0</md-option>
+              <md-option value="1">1</md-option>
+              <md-option value="2">2</md-option>
+              <md-option value="3">3</md-option>
+              <md-option value="4">4</md-option>
+              <md-option value="5">5</md-option>
+              <md-option value="6">6</md-option>
+              <md-option value="7">7</md-option>
+              <md-option value="8">8</md-option>
+        </md-select>
+      </div>
+      <div class="col">
+        <label class="item dropdown-item-input item-stacked-label">
+        <span class="dropdown-input-label">Hand Luggages</span>
+        <!-- <input type="number" min="0" placeholder="0" ng-model="bookingForm.handluggages" > -->
+        </label>
+        <md-select ng-model="bookingForm.handluggages" placeholder="0" class="">
+              <md-option value="0">0</md-option>
+              <md-option value="1">1</md-option>
+              <md-option value="2">2</md-option>
+              <md-option value="3">3</md-option>
+              <md-option value="4">4</md-option>
+              <md-option value="5">5</md-option>
+              <md-option value="6">6</md-option>
+              <md-option value="7">7</md-option>
+              <md-option value="8">8</md-option>
+        </md-select>
+      </div>
+    </div>
+    
+    </md-card>
+    
+    <md-card>
+    
+    <div class="row" >
+      <div class="col">
+       
+        <label class="item item-input ">
+         <button style="color:#03316B;min-height:36px !important;margin-bottom:7px;" class="button icon ion-information-circled button-clear" ng-click="showvehicleinfo($event)">
+          </button>
+            <div class="input-label">
+                Select suitable vehicle type
+            </div>
+            <!-- <select class="input-label" ng-model="veh_type"   >
+                <option ng-repeat="veh in vehicletypes" value="{{veh.ID}}" >{{veh.TYPE}}</option>
+            </select> -->
+            <!-- <div class="input-label vehicletype" ng-model="bookingForm.veh_type" >{{ bookingForm.veh_type_name }}</div> -->
+        </label>
+        <!-- <md-select ng-model="veh_type">
+            <md-option><em>None</em></md-option>
+            <md-option ng-repeat="veh in vehicletypes" value="{{veh.ID}}" >
+                {{ veh.TYPE }}
+            </md-option>
+          </md-select> -->
+       </div>
+    </div>
+    <div class="row" >
+        <div class="col">
+         <md-select ng-model="veh_type" class="" ng-change="select_vehicle()" >
+              <md-option ng-repeat="veh in vehicletypes" value="{{$index}}">{{ veh.TYPE }}</md-option>
+         </md-select>
+            <!-- <md-button ng-click="showPopup()"  class="md-raised angmat-positive-btn ">{{bookingForm.vehicle.TYPE}}</md-button> -->
+        </div>
+    </div>
+    
+    </md-card>
+    
+    <!-- <div class="row">
+      <div class="col">
+        <button class="button button-block button-positive" ng-click="getestimate()" >
+          Get estimate
+        </button>
+        <button class="button button-block button-positive" ng-click="search()" >
+          Search
+        </button> 
+    </div>
+    </div> -->
+    
+    <div style="margin:0 0px;" layout="row" layout-align="center center" >
+        <md-button style="width:100%;" type="button" class="angmat-positive-btn md-raised "  ng-click="getestimate()" >
+          Get estimate
+        </md-button>    
+    </div>
+        
+    </div>
+    
+    </div>
+    <div ng-form name="CustomerBookingForm"  class="booking-form-background"  >
+    
+    <div ng-hide="isHideBookingCost">
+    
+    <md-card>
+        <!-- <div class="item list-border final-booking-price-card-item" style="padding-top:16px;" > -->
+            <div class="" style="background-color:#03316B;">
+                <div class="row">
+                    <div class="col" >
+                        <div class="content-heading" style="color:#FFF;">
+                        Estimate for your ride is :
+                        <div style="font-size:28px;margin-top:10px;" ng-bind-html="'&pound; &nbsp;' + (bookingCost) " ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </md-card>
+    
+        <!-- Starting location card -->
+        <md-card ng-show="isFromLocationAPostcode" >
+        <!-- <div class="item list-border final-booking-price-card-item" ng-show="isFromLocationAPostcode" >
+        <div class="card zero-margin" style="padding:13px 6px;"> -->
+        
+            <div class="row" >
+              <div class="col">
+                <span class="label-header">Starting location address</span>
+                <div style="margin:0 0px;" layout="row" layout-align="center center" >
+                <md-button style="width:100%;" class="angmat-positive-btn md-raised" ng-click="getstartaddresslist()" >
+                  Find Address
+                </md-button>
+                </div>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Building Number or Name</span>
+                <input ng-required="isFromLocationAPostcode" type="text" name="startBuildingNumber" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.startBuildingNumber.$invalid}" 
+                ng-model="postcodeLocations.startBuildingNumber" >
+                <div class="form-errors" ng-messages="CustomerBookingForm.startBuildingNumber.$error" ng-messages-include="templates/form-errors.html">
+                </div>
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Name</span>
+                <input ng-required="isFromLocationAPostcode" type="text" name="startStreetName"  
+                ng-class="{ 'input-has-error' : CustomerBookingForm.startStreetName.$invalid}" 
+                ng-model="postcodeLocations.startStreetName" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Postal Town</span>
+                <input ng-required="isFromLocationAPostcode" type="text" name="startPostalTown" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.startPostalTown.$invalid}" 
+                ng-model="postcodeLocations.startPostalTown" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">County</span>
+                <input ng-required="isFromLocationAPostcode" type="text" name="startCounty" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.startCounty.$invalid}" 
+                ng-model="postcodeLocations.startCounty" >
+                </label>
+              </div>
+            </div>
+        
+        <!-- </div>
+        </div> -->
+        
+        </md-card>
+        
+        <!-- End Starting location card -->
+        
+        <!-- Ending location card -->
+        <md-card ng-show="isToLocationAPostcode" >
+        <!-- <div class="item list-border final-booking-price-card-item" ng-show="isToLocationAPostcode" >
+        <div class="card zero-margin" style="padding:13px 6px;"> -->
+        
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+              <div class="col">
+                <span class="label-header">Ending location address</span>
+                <div style="margin:0 0px;" layout="row" layout-align="center center" >
+                <md-button style="width:100%;" type="button" class=" angmat-positive-btn md-raised " ng-click="getendaddresslist()" >
+                  Find Address
+                </md-button>
+                </div>
+              </div>
+            </section>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Building Number or Name</span>
+                <input ng-required="isToLocationAPostcode" type="text" name="endBuildingNumber" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.endBuildingNumber.$invalid}" 
+                ng-model="postcodeLocations.endBuildingNumber" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Name</span>
+                <input ng-required="isToLocationAPostcode" type="text" name="endStreetName" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.endStreetName.$invalid}" 
+                ng-model="postcodeLocations.endStreetName" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Postal Town</span>
+                <input ng-required="isToLocationAPostcode" type="text" name="endPostalTown" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.endPostalTown.$invalid}" 
+                ng-model="postcodeLocations.endPostalTown" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">County</span>
+                <input ng-required="isToLocationAPostcode" type="text" name="endCounty" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.endCounty.$invalid}" 
+                ng-model="postcodeLocations.endCounty" >
+                </label>
+              </div>
+            </div>
+        
+        <!-- </div>
+        </div> -->
+        </md-card>
+        <!-- End Ending location card -->
+        
+        <!-- Flight details card -->
+        <md-card ng-show="isFromLocationAnAirport" >
+        <!-- <div class="item list-border final-booking-price-card-item" ng-show="isFromLocationAnAirport" >
+        <div class="card zero-margin" style="padding:13px 6px;"> -->
+        
+            <div class="row" >
+              <div class="col">
+                <span class="label-header">Flight details</span>
+                </label>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Flight Number</span>
+                <input ng-required="isFromLocationAnAirport" type="text" name="flightNumber" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.flightNumber.$invalid}" 
+                ng-model="postcodeLocations.flightNumber" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Date</span>
+                <input ng-required="isFromLocationAnAirport" type="date" name="arrivalDate" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.arrivalDate.$invalid}" 
+                ng-model="arrivalDate" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Time</span>
+                <input ng-required="isFromLocationAnAirport" type="time" name="arrivalTime" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.arrivalTime.$invalid}" 
+                ng-model="arrivalTime" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature from</span>
+                <input ng-required="isFromLocationAnAirport" type="text" name="depatureFrom" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.depatureFrom.$invalid}" 
+                ng-model="postcodeLocations.depatureFrom" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Date</span>
+                <input ng-required="isFromLocationAnAirport" type="date" name="depatureDate" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.depatureDate.$invalid}" 
+                ng-model="depatureDate" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Time</span>
+                <input ng-required="isFromLocationAnAirport" type="time" name="depatureTime" 
+                ng-class="{ 'input-has-error' : CustomerBookingForm.depatureTime.$invalid}" 
+                ng-model="depatureTime" >
+                </label>
+              </div>
+            </div>
+        
+        <!-- </div>
+        </div> -->
+        </md-card>
+        <!-- End Flight details card -->
+        
+        <md-card>
+        <!-- <div class="item list-border final-booking-price-card-item" ng-show="!isHideBookingCost" >
+        <div class="card zero-margin" style="padding:13px 6px;"> -->
+             <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Comments</span>
+                <textarea required ng-model="bookingForm.comments">-</textarea>
+                </label>
+              </div>
+            </div>
+          <!-- </div>
+        </div> -->
+        </md-card>
+        
+        <md-card>
+        <!-- <div class="item list-border final-booking-price-card-item" >
+        <div class="card zero-margin" style="padding:13px 6px;"> -->
+        <div class="row">
+            <div class="col" >
+            <md-radio-group ng-model="bookingForm.paymentMethod">
+              <md-radio-button value="1" class="md-primary" >Pay by cash</md-radio-button>
+              <md-radio-button value="3" class="md-primary" >Pay by card to driver </md-radio-button>
+              <md-radio-button ng-show="isPaypalEnabled" value="2" class="md-primary" >Pay by PayPal</md-radio-button>
+            </md-radio-group>
+          <!-- <div class="col col-50"><ion-radio ng-model="bookingForm.paymentMethod" ng-value="1">Pay by cash</ion-radio></div>
+          <div class="col col-50"><ion-radio ng-model="bookingForm.paymentMethod" ng-value="3">Pay by card <br> to driver</ion-radio></div> -->
+          </div>
+        </div>
+        <!-- </div>
+        </div> -->
+        </md-card>
+        
+        <div layout="row" layout-align="center center" >
+            <md-button style="margin-right:20px;" class="angmat-positive-btn md-raised " ng-click="booknow()" ng-disabled="CustomerBookingForm.$invalid" >
+              Book Now
+            </md-button>
+            <md-button style="margin:0;" class="angmat-positive-btn md-raised" ng-click="cancel()" >
+              Cancel
+            </md-button>
+        </div>
+        
+    </div>
+    
+    </div>
+
+  </ion-content>
+</ion-view>

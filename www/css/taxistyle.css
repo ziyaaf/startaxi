@@ -1,0 +1,281 @@
+/* Empty. Add your own CSS if you like */
+body{
+    font-family: 'robotolight', Arial, sans-serif;
+}
+
+div > .item-complex .item-content, .item-radio .item-content{
+    background: none !important;
+    color: black  !important;
+}
+
+h4{
+    font-family: inherit;
+}
+
+.item-radio input:checked + .radio-content .radio-icon{
+    color: black  !important;
+}
+
+.list .activated{
+    /*background-color: blue;
+    color: white;*/
+}
+
+.address-list-style{
+    overflow: initial;
+    white-space: initial;
+}
+
+textarea, input[type="text"],input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
+    border: 1px solid #E3E3E3;
+    border-radius: 3px; 
+    background-color: #f2f2f2;
+    padding-left: 6px;
+    color: #6A7F97;
+}
+
+.login-input-fields{
+    border: none !important;
+    padding-left: 20px !important;
+    background-color: none;
+    color: #6A7F97;
+}
+.login-fields{
+    border: 1px solid #E3E3E3 !important;
+    border-radius: 3px !important; 
+    padding-left: 20px !important;
+}
+
+.login-button{
+    border-radius: 50px;
+    width: 150px;
+    box-shadow: 12px 11px 22px -9px rgba(122,111,122,0.61);
+}
+
+.reset-cancel-button{
+    border-radius: 50px;
+    width: 130px;
+    box-shadow: 12px 11px 22px -9px rgba(122,111,122,0.61);
+}
+
+.required-field{
+    color: #990000;
+    font-weight: bold;
+}
+
+/* Start error */
+.input-has-error{
+    border: 1px solid #ef473a !important;
+    border-radius: 3px !important;
+    background-color: rgba(239, 71, 58, 0.11) !important;
+    padding-left: 6px !important;
+    color: #6A7F97 !important;
+}
+
+.activated {
+    color: red;
+}
+
+.form-errors {
+  margin: 5px 0
+}
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: red;
+}
+
+/* End error */
+
+.title{
+ color: white;
+}
+
+.item{
+ border: none;   
+}
+
+.item-input{
+ padding: 6px 0 5px 6px;   
+}
+
+.dropdown-item-input{
+ padding: 6px 0 0px 6px;   
+}
+
+.location-name-text {
+    color: #6A7F97;     
+ }
+
+.input-label{
+    color: #03316B;
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.dropdown-input-label{
+    color: #03316B;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.label-header{
+    color: #03316B;
+    margin-left: 6px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input-label-readonly{
+    color: #000;
+}
+
+.bar.bar-stable{
+    background-color: #03316B;
+    color:#FFF;
+    border:1px solid #03316B;
+}
+
+.bar-header{
+    background-color: #03316B;
+    color:#FFF;
+    border:1px solid #03316B;
+}
+
+.bar-stable .button.button-clear{
+    color:#FFF;
+}
+
+.bar.bar-stable .title{
+    color: #FFF;
+}
+
+.button.button-positive{
+    background-color: #05499e;
+}
+
+.toggle.toggle-energized input:checked + .track{
+    border-color: #05499e;
+    background-color: #05499e;
+}
+
+.item{
+    /*color: #FFF;*/
+    color: #000;
+}
+
+.item-complex .item-content, .item-radio .item-content{
+    background-color: #03316B;
+}
+
+.list-item-border{
+    border-bottom:1px solid #d1d1d1;
+}
+
+.mytriplist-date{
+    color: #7d7d7d;
+    font-size: 95%;
+}
+
+.content-text{
+    color: #000;
+}
+
+.content-heading{
+    text-align:center;
+    font-size:110%;
+    text-transform:uppercase;
+    margin:10px 0;
+    color: #03316B;
+}
+
+.side-menu{
+    /*background-color: #03316B;
+    border: 1px solid #03316B;*/
+}
+
+.zero-margin{
+    margin: 0;
+}
+
+.card{
+    box-shadow: 12px 11px 22px -9px rgba(122,111,122,0.61);
+}
+
+.booking-card{
+     box-shadow: rgba(204, 204, 204, 0.69) 2px 2px 4px;
+     margin: 20px;
+}
+
+.card-item{
+    padding: 16px 16px 16px 16px;
+    background-color: #eee;
+}
+
+.final-booking-price-card-item{
+    padding: 0px 16px 16px 16px;
+    background-color: #FFF;
+}
+
+.vehicletype{
+    color: black;
+}
+
+.slider-slide {
+  padding-top: 80px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  height: 85vh;
+}
+
+/* Styles here */
+
+.home .scroll-content {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin-top: -50px;
+  text-align: center;
+}
+.home .scroll {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.terminal-charge-bg{
+    background-color: aliceblue;
+    color:#03316B;
+}
+
+
+md-select{
+    margin: 0 !important;
+    border-bottom-color: transparent; 
+}
+
+.md-select-value{
+    margin: 0 !important;
+    border-bottom-color: transparent; 
+}
+
+.booking-form-background{
+    background-color: #eee;
+}
+
+.angmat-positive-btn{
+    background-color: #05499e !important;
+    color: white !important;
+    padding: 3px 15px !important;
+}
+
+
+.angmat-positive-btn[disabled] {
+    background-color: #EEE !important;
+    color: black !important;
+    padding: 3px 15px !important;
+}
+
+

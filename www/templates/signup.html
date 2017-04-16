@@ -1,0 +1,73 @@
+<ion-modal-view   view-title="Booking" >
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+  </ion-header-bar>
+  <ion-content ng-controller="SignupCtrl" >
+  <div class="row">
+        <div class="col">
+        <div style="text-align:center;"><h4>New User Registration</h4></div>
+        </div>
+        </div>
+  <form ng-submit="doSignup()">
+      <div class="row">
+        <div class="col">
+            <label class="item item-input item-stacked-label">
+            <span class="input-label">First Name<span class="required-field">&nbsp;&nbsp;*</span></span>
+            <input type="text" ng-model="signupForm.firstName"  >
+            </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label class="item item-input item-stacked-label">
+            <span class="input-label">Mobile Number<span class="required-field">&nbsp;&nbsp;*</span></span>
+            <input type="text" ng-model="signupForm.mobileNumber"  >
+            </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label class="item item-input item-stacked-label">
+            <span class="input-label">Email <span class="required-field">&nbsp;&nbsp;*</span></span>
+            <input type="text" ng-model="signupForm.email"  >
+            </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label class="item item-input item-stacked-label">
+            <span class="input-label">Password<span class="required-field">&nbsp;&nbsp;*</span></span>
+            <input type="password" ng-model="signupForm.password"  >
+            </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label class="item item-input item-stacked-label">
+            <span class="input-label">Confirm Password<span class="required-field">&nbsp;&nbsp;*</span></span>
+            <input type="password" ng-model="signupForm.confirmPassword"  >
+            </label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col" style="text-align:right;">
+            <!-- <button name="signup" class="button button-block button-positive" type="submit" > 
+            Signup
+            </button> -->
+            <md-button style="100%;"  class="angmat-positive-btn md-raised " type="submit" >
+              Signup
+            </md-button> 
+          </div>
+          <div class="col">
+          <md-button ng-click="cancelSignup()" style="100%" type="button" class="angmat-positive-btn md-raised " >
+              Cancel
+            </md-button>
+            <!-- <button type='button' name="cancel" ng-click="cancelSignup()" class="button button-block button-positive" >
+              Cancel
+            </button> -->
+          </div>
+      </div>
+      
+    </form>
+  </ion-content>
+  </ion-modal-view>

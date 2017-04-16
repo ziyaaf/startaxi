@@ -1,0 +1,39 @@
+<md-dialog aria-label="Vehicle Info">
+
+<md-dialog-content style="margin:10px;" >
+<div ng-repeat="vehicle in vehicles" >
+    <div style="text-align:center;" >
+        <h5>{{vehicle.TYPE}}</h5>
+        <div id="logo">
+          <img src="https://pocket.deals/startaxiws/web/images/{{vehicle.IMAGE_NAME}}{{vehicle.IMAGE_TYPE}}">
+        </div>
+        <p>
+          {{vehicle.DESCRIPTION}}
+        </p>
+        
+        <div class = "row">
+           <div class = "col col-80">Number of Passengers :</div>
+           <div class = "col">{{vehicle.MAX_PASSENGER}}</div>
+        </div>
+        <div class = "row">
+           <div class = "col col-80">Number of Luggages :</div>
+           <div class = "col">{{vehicle.MAX_LUGGAGE}}</div>
+        </div>
+        <div class = "row">
+           <div class = "col col-80">Number of hand luggages :</div>
+           <div class = "col">{{vehicle.MAX_HAND_LUGGAGE}}</div>
+        </div>
+        <hr style="background-color: #eee;height: 1px;border: 0;">
+    </div>
+</div>
+</md-dialog-content>
+
+<md-dialog-actions style="border-top:#eee 1px solid;" layout="row" layout-align="center center">
+      
+      <md-button ng-click="cancel()" >
+       Close
+      </md-button>
+      
+</md-dialog-actions>
+
+</md-dialog>

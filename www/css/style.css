@@ -1,0 +1,147 @@
+/* Empty. Add your own CSS if you like */
+body{
+    font-family: 'robotolight', Arial, sans-serif;
+}
+
+div > .item-complex .item-content, .item-radio .item-content{
+    background: none !important;
+    color: black  !important;
+}
+
+.item-radio input:checked + .radio-content .radio-icon{
+    color: black  !important;
+}
+
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
+    /*border: 1px solid #EEF1F6;
+    border-radius: 3px; 
+    background-color: #EEF1F6;*/
+    border-bottom: 1px solid #EEF1F6;
+    padding-left: 6px;
+    color: #6A7F97;
+}
+
+.title{
+ color: white;
+}
+
+.item{
+ border: none;   
+}
+
+.item-input{
+ padding: 6px 0 5px 6px;   
+}
+
+.location-name-text {
+    color: #6A7F97;     
+ }
+
+.input-label{
+    color: #03316B;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.label-header{
+    color: #03316B;
+    margin-left: 6px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input-label-readonly{
+    color: #000;
+}
+
+.bar.bar-stable{
+    background-color: #03316B;
+    color:#FFF;
+    border:1px solid #03316B;
+}
+
+.bar-header{
+    background-color: #03316B;
+    color:#FFF;
+    border:1px solid #03316B;
+}
+
+.bar-stable .button.button-clear{
+    color:#FFF;
+}
+
+.bar.bar-stable .title{
+    color: #FFF;
+}
+
+.button.button-positive{
+    background-color: #05499e;
+}
+
+.toggle.toggle-energized input:checked + .track{
+    border-color: #05499e;
+    background-color: #05499e;
+}
+
+.item{
+    color: #FFF;
+}
+
+.item-complex .item-content, .item-radio .item-content{
+    background-color: #03316B;
+}
+
+.list-item-border{
+    border-bottom:1px solid #d1d1d1;
+}
+
+.mytriplist-date{
+    color: #7d7d7d;
+    font-size: 95%;
+}
+
+.content-text{
+    color: #000;
+}
+
+.content-heading{
+    text-align:center;
+    font-size:110%;
+    text-transform:uppercase;
+    margin:10px 0;
+    color: #03316B;
+}
+
+.side-menu{
+    /*background-color: #03316B;
+    border: 1px solid #03316B;*/
+}
+
+.zero-margin{
+    margin: 0;
+}
+
+.card-item{
+    padding: 16px 16px 5px 16px;
+    background-color: #eee;
+}
+
+.final-booking-price-card-item{
+    padding: 0px 16px 16px 16px;
+    background-color: #FFF;
+}
+
+.vehicletype{
+    color: black;
+}
+
+.slider-slide {
+  padding-top: 80px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  height: 85vh;
+}
+

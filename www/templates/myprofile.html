@@ -1,0 +1,137 @@
+<ion-view view-title="My Profile">
+ 
+    <ion-tabs class="tabs-light tabs-icon-top">
+
+      <ion-tab title="Personal Info" icon-on="ion-person" icon-off="ion-ios-person-outline">
+        <!-- Tab 1 content -->
+        <ion-view>
+        <ion-content ng-controller="PersonalinfoCtrl">
+          <!-- Start Personal Info form -->
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Title</span>
+                    <!-- <input type="text" placeholder="Title"> -->
+                  </label>
+                  <md-select ng-model="myprofile.title" placeholder="myprofile.title" class="" >
+                          <md-option value="1">Mr</md-option>
+                          <md-option value="2">Mrs</md-option>
+                          <md-option value="3">Miss</md-option>
+                          <md-option value="4">Ms</md-option>
+                          <md-option value="5">Dr</md-option>
+                    </md-select>
+              </div>
+              <div class="col"></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">First Name<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.firstname" type="text" placeholder="First Name">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Last Name<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.lastname" type="text" placeholder="Last Name">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Phone<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.phone" type="text" placeholder="Phone">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Mobile<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.mobile" type="text" placeholder="Mobile">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Email<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.email" type="text" placeholder="Email">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <button ng-click="save()" class="button button-block button-positive">
+                      Save
+                    </button>
+              </div>
+            </div>
+          <!-- End Personal Info form -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+    
+      <ion-tab title="Address" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
+        <!-- Tab 2 content -->
+        <ion-view>
+        <ion-content ng-controller="AddressCtrl">
+          <!-- Start Address form -->
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">House number or name<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.housename" type="text" placeholder="House number or name">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Street name<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.streetname" type="text" placeholder="Street name">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Postal Town<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.postaltown" type="text" placeholder="Postal Town">
+                  </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Postal Code<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.postalcode" type="text" placeholder="Postal Code">
+                  </label>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">County<span class="required-field">&nbsp;&nbsp;*</span></span>
+                    <input ng-model="myprofile.county" type="text" placeholder="County">
+                  </label>
+              </div>
+            </div> -->
+            <div class="row">
+              <div class="col">
+                  <button ng-click="save()" class="button button-block button-positive">
+                      Save
+                    </button>
+              </div>
+            </div>
+          <!-- End Address form -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+    
+    </ion-tabs>
+
+</ion-view>

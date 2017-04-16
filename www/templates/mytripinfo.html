@@ -1,0 +1,342 @@
+<ion-view view-title="My Trip Information" ng-controller="MytripinfoCtrl" >
+
+<ion-nav-bar>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+
+    <ion-tabs class="tabs-light tabs-icon-top">
+
+      <ion-tab title="User Journey" >
+        <!-- Tab 1 content -->
+        <ion-view>
+        <ion-content >
+          <!-- User Journey -->
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Passengers</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly" >{{passengers }}</span>
+                </label>
+              </div> 
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Luggage</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{luggage}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Hand Luggage</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{handluggage}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Is seat required</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{seatrequired  | yesnotext}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Seats</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{seats}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Return</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{isreturn | yesnotext}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Vehicle Type</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{vehicletype | vehicletype}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Amount</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{amount | currency:"£ " }}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Booking Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{bookingdate}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Booking Status</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{bookingstatus | pendingapprovestatus}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Payment Type</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{paymenttype | paymenttype}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Confirmed Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{confirmeddate}}</span>
+                </label>
+              </div>
+            </div>
+          <!-- End User Journey -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+    
+      <ion-tab title="Journey Information" >
+        <!-- Tab 2 content -->
+        <ion-view>
+        <ion-content >
+          <!-- Journey Information -->
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">From</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{fromid}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">To</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{toid}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">From Type</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{fromtype | locationtype}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">To Type</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{totype | locationtype}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Is return ?</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{isreturn | yesnotext}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Outboud Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{outbounddate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Outbound Time</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{outboundhour}}:{{outboundminute}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label"></span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly"></span>
+                </label>
+              </div>
+            </div>
+          <!-- End Journey Information -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+      
+      
+      <ion-tab title="Flight Information" >
+        <!-- Tab 3 content -->
+        <ion-view>
+        <ion-content >
+          <!-- Flight Information -->
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Flight number</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{flightnumber}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{arrivaldate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Time</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{arrivalhour}}:{{arrivalminute}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature From</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{depaturefrom}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{depaturedate}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Time</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{depaturehour}}:{{depatureminute}}</span>
+                </label>
+              </div>
+            </div>
+          <!-- End Flight Information -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+      
+      
+      <ion-tab title="Return flight informatio" >
+        <!-- Tab 4 content -->
+        <ion-view>
+        <ion-content >
+          <!-- Return flight information -->
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Flight number</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_flightnumber}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_arrivaldate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Time</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_arrivalhour}}:{{rf_arrivalminute}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature From</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_depaturefrom}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Date</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_depaturedate}}</span>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Time</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                <span class="input-label-readonly">{{rf_depaturehour}}:{{rf_depatureminute}}</span>
+                </label>
+              </div>
+            </div>
+          <!-- End Return flight information -->
+        </ion-content>
+      </ion-view>
+      </ion-tab>
+    
+    </ion-tabs>
+
+</ion-view>

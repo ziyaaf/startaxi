@@ -1,0 +1,407 @@
+<ion-view view-title="Booking" >
+  <ion-content ng-controller="BookingCtrl" >
+  <div ng-hide="!isHideBookingCost">
+      
+    <!-- Error messages -->
+    <div class="row">
+        <div class="col">
+        <div class="item item-input item-stacked-label" >
+            
+        </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-25">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">From</span>
+            </label>
+        </div>       
+      <div class="col"> 
+      <angucomplete-alt  class="dropfield item-input item-stacked-label" 
+          id="fromloc" 
+              ng-model="bookingForm.from_loc" 
+              placeholder="Pickup location"
+              maxlength="50"
+              pause="1000"
+              selected-object="fromLocation"
+              override-suggestions="true" 
+              initial-value="initfromloc" 
+              remote-url="https://pocket.deals/startaxiws/web/location/getautocompletepostcode?&limit=5"
+              remote-url-request-formatter="remoteUrlRequestFn"
+              remote-url-data-field="result"
+              search-fields="postcode"
+              title-field="name"
+              minlength="1"
+              input-class="form-control form-control-small"
+              match-class="highlight" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">To</span>
+            <angucomplete-alt class="dropfield item-input item-stacked-label" 
+              ng-model="bookingForm.to_loc"
+              placeholder="Destination"
+              maxlength="50"
+              pause="2000"
+              selected-object="toLocation"
+              override-suggestions="true"  
+              initial-value="inittoloc" 
+              remote-url="https://pocket.deals/startaxiws/web/location/getautocompletepostcode?&limit=5"
+              remote-url-request-formatter="remoteUrlRequestFn"
+              remote-url-data-field="result"
+              search-fields="postcode"
+              title-field="name"
+              minlength="1"
+              input-class="form-control form-control-small"
+              match-class="highlight" />
+          </label>
+          
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col">
+          <label class="item item-input" >
+            <span class="input-label" ng-show="isShowHigherCharge"
+            style="background-color:none;padding-left:0px;">Additional charge of &pound; {{additionalCharge}} is applicable</span>
+          </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Child seat ?</span>
+        <div>    <label class="toggle toggle-energized">
+               <input type="checkbox" ng-model="bookingForm.is_child_seat_req" >
+               <div class="track">
+                 <div class="handle"></div> 
+               </div>
+            </label> </div>
+        </label>
+      </div>
+      <div class="col" ng-show="bookingForm.is_child_seat_req">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Number of seats</span>
+        <div>
+            <input type="number" min="0" max="3" placeholder="1" ng-model="bookingForm.noofchildseats" >
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+            </div>
+        </label>
+      </div>
+    </div>
+    <!-- Journey start date -->
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Start Date</span>
+        <input type="date" ng-model="bookingForm.bookingStartDate" min="{{minstartdate}}" >
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Start Time</span>
+        <input type="time" ng-model="bookingForm.bookingStartTime">
+        </label>
+      </div>
+    </div>
+    <!-- Journey end date -->
+    <div class="row" ng-show="bookingForm.is_ret_req" >
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Return Date</span>
+        <input type="date" ng-model="bookingForm.bookingReturnDate" min="{{minstartdate}}" >
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Return Time</span>
+        <input type="time" ng-model="bookingForm.bookingReturnTime">
+        </label>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Number of passengers</span>
+        <input ng-change="setvehicletype($event)" type="number" min="1" placeholder="1" ng-model="bookingForm.noofpassengers" >
+        </label>
+      </div>
+      <div class="col">
+        
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Luggages </span>
+        <input type="number" min="0" placeholder="0" ng-model="bookingForm.luggages" >
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Hand Luggages</span>
+        <input type="number" min="0" placeholder="0" ng-model="bookingForm.handluggages" >
+        </label>
+      </div>
+    </div>
+    
+    <div class="row" >
+      <div class="col">
+        <label class="item item-input ">
+          <button style="min-height:36px !important;" class="button icon ion-information-circled button-clear" ng-click="showvehicleinfo()">
+          </button>
+            <div class="input-label">
+                Suitable vehicle type
+            </div>
+            <!-- <select class="input-label" ng-model="veh_type"   >
+                <option ng-repeat="veh in vehicletypes" value="{{veh.ID}}" >{{veh.TYPE}}</option>
+            </select> -->
+            <!-- <div class="input-label vehicletype" ng-model="bookingForm.veh_type" >{{ bookingForm.veh_type_name }}</div> -->
+        </label>
+       </div>
+      <div class="col">
+        <label class="item item-input ">
+            <div class="input-label">
+            <select  
+            style="border: none;background-color: white;" 
+            ng-options="veh.ID as veh.TYPE for veh in vehicletypes track by veh.ID" 
+            ng-model="bookingForm.vehicle"></select>
+            </div>
+        </label>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-positive" ng-click="getestimate()" >
+          Get estimate
+        </button>
+    </div></div>
+        
+    </div>
+    
+    <div ng-hide="isHideBookingCost">
+    
+        <div class="item list-border final-booking-price-card-item" >
+            <div class="card zero-margin" style="background-color:#03316B;">
+                <div class="row">
+                    <div class="col" >
+                        <div class="content-heading" style="color:#FFF;">
+                        Estimate for your ride is : 
+                        <div ng-bind-html="bookingCost" ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Starting location card -->
+        <div class="item list-border final-booking-price-card-item" ng-show="isFromLocationAPostcode" >
+        <div class="card zero-margin" style="padding:13px 6px;">
+        
+            <div class="row" >
+              <div class="col">
+                <span class="label-header">Journey start location address</span>
+                </label>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Building Number or Name</span>
+                <input type="text" ng-model="postcodeLocations.startBuildingNumber" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Name</span>
+                <input type="text" ng-model="postcodeLocations.startStreetName" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Postal Town</span>
+                <input type="text" ng-model="postcodeLocations.startPostalTown" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">County</span>
+                <input type="text" ng-model="postcodeLocations.startCounty" >
+                </label>
+              </div>
+            </div>
+        
+        </div>
+        </div>
+        <!-- End Starting location card -->
+        
+        <!-- Ending location card -->
+        <div class="item list-border final-booking-price-card-item" ng-show="isToLocationAPostcode" >
+        <div class="card zero-margin" style="padding:13px 6px;">
+        
+            <div class="row" >
+              <div class="col">
+                <span class="label-header">Journey end location address</span>
+                </label>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Building Number or Name</span>
+                <input type="text" ng-model="postcodeLocations.endBuildingNumber" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Name</span>
+                <input type="text" ng-model="postcodeLocations.endStreetName" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Postal Town</span>
+                <input type="text" ng-model="postcodeLocations.endPostalTown" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">County</span>
+                <input type="text" ng-model="postcodeLocations.endCounty" >
+                </label>
+              </div>
+            </div>
+        
+        </div>
+        </div>
+        <!-- End Ending location card -->
+        
+        <!-- Flight details card -->
+        <div class="item list-border final-booking-price-card-item" ng-show="isFromLocationAnAirport" >
+        <div class="card zero-margin" style="padding:13px 6px;">
+        
+            <div class="row" >
+              <div class="col">
+                <span class="label-header">Flight details</span>
+                </label>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Flight Number</span>
+                <input type="text" ng-model="postcodeLocations.flightNumber" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Date</span>
+                <input type="date" ng-model="postcodeLocations.arrivalDate" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Arrival Time</span>
+                <input type="time" ng-model="postcodeLocations.arrivalTime" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature from</span>
+                <input type="text" ng-model="postcodeLocations.depatureFrom" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Date</span>
+                <input type="date" ng-model="postcodeLocations.depatureDate" >
+                </label>
+              </div>
+            </div>
+            
+            <div class="row" >
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Depature Time</span>
+                <input type="time" ng-model="postcodeLocations.depatureTime" >
+                </label>
+            </div>
+        
+        </div>
+        </div>
+        <!-- End Flight details card -->
+        
+        <div class="item list-border final-booking-price-card-item" ng-show="!isHideBookingCost" >
+        <div class="card zero-margin" style="padding:13px 6px;">
+             <div class="row" >
+              <div class="col">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Comments</span>
+                <textarea ng-model="bookingForm.comments">-</textarea>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-50"><ion-radio ng-model="bookingForm.paymentMethod" ng-value="1">Pay by cash</ion-radio></div>
+          <div class="col col-50"><ion-radio ng-model="bookingForm.paymentMethod" ng-value="3">Pay by card <br> to driver</ion-radio></div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <button class="button button-block button-positive" ng-click="booknow()" >
+              Book Now
+            </button>
+          </div>
+          <div class="col">
+            <button class="button button-block button-positive" ng-click="cancel()" >
+              Cancel
+            </button>
+          </div>
+        </div>
+        
+    </div>
+    
+  </ion-content>
+</ion-view>

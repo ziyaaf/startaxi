@@ -1,0 +1,65 @@
+<ion-modal-view class="home" >
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+  </ion-header-bar>
+  <ion-content >
+  <form ng-submit="doLogin()">
+      <div class="row">
+        <div class="col">
+            <!-- <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input type="text" ng-model="loginform.username">
+            </label> -->
+            <div class="list list-inset">
+              <label class="item item-input login-fields">
+                <i class="icon ion-person placeholder-icon"></i>
+                <input style="background-color:white;" ng-model="loginform.username" type="text" placeholder="Username" class="login-input-fields" >
+              </label>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <!-- <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input type="password" ng-model="loginform.password">
+            </label> -->
+            <div class="list list-inset">
+              <label class="item item-input login-fields">
+                <i class="icon ion-ios-locked placeholder-icon"></i>
+                <input style="background-color:white;" ng-model="loginform.password" type="password" placeholder="Password" class="login-input-fields" >
+              </label>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align:center;margin-top: 20px;" >
+          <button class="button button-positive login-button" type="submit">Log in</button>
+          </div>
+      </div>
+      <div class="row" >
+        <div class="col">
+              <!-- <span class="input-label"></span> -->
+              <div style="color:red;margin-top: 20px;">{{error_message}}</div>
+        </div>
+      </div>
+    </div>
+    </form>
+    <div ng-controller="SignupForgotPwdCtrl">
+        
+    <div class="row">
+        <div class="col" style="text-align:right;padding:0 5px 0 0;" ng-click="" >
+        <button class="button button-clear button-positive" ng-click="showForgotPwd()">
+          Forgot Password ?
+        </button>
+        </div>
+        <div class="col" style="text-align:left;padding:0;"  >
+        <button class="button button-clear button-positive" ng-click="showSignup()">
+          New User signup
+        </button>
+        </div>
+    </div>
+    
+    </div>
+  </ion-content>
+</ion-modal-view>
